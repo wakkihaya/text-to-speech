@@ -1,10 +1,22 @@
-import TextToSpeechClient from "@google-cloud/text-to-speech"
+const dotenv = require('dotenv');
+const textToSpeech = require("@google-cloud/text-to-speech");
+const fs = require('fs-extra');
+const express = require('express');
 
-const main = async function() {
-    const client = new TextToSpeechClient();
+var app = express();
+
+dotenv.config({ path: '../.env'});
+
+app.post('/output',(req,res)=>{
+    var input = req["text"];
+    main(input);
+})
+
+const main = async function(value) {
+    const client = new textToSpeech.TextToSpeechClient();
 
     const request = {
-        input: {text: 'Hi, how are you doing?'},
+        input: {text: value },
         voice: {languageCode: 'en-US', name: 'en-US-Wavenet-D'},
         audioConfig: {
             audioEncoding: `MP3`,
@@ -14,7 +26,6 @@ const main = async function() {
     };
 
     const [response] = await client.synthesizeSpeech(request);
-    fs.writeFileSync(`output.mp3`, response.audioContent, `binary`)
+    fs.writeFileSync(`../output/output.mp3`, response.audioContent, `binary`)
 };
 
-main();

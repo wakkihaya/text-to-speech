@@ -5,10 +5,13 @@
     <title>test text-to-speech</title>
 </head>
 <body>
-    <form name="form1" id="id_form1" action="/output" method="post">
-        <input name="text" id="id_textBox1" type="text" value="" />
-        <input type="button" value="Exec" onclick="onButtonClick();" />
+    <form name="form1" action="/output" method="POST">
+        <input name="msg" id="msg" type="text">
+        <button type="submit" value="Exec">submit</button>
     </form>
-</body>
+
+    <audio controls>
+      <source src="../output/output.mp3" type="audio/mp3">
+    </audio>
 </html>
 <script src="index.js"></script>

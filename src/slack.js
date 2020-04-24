@@ -1,12 +1,14 @@
 import axios from 'axios';
 import qs from 'qs';
-require('dotenv').config();
+import dotenv from 'dotenv';
 
+dotenv.config({ path: '../.env'});
 
 const getMessages = async function () {
     const token = process.env.SLACK_TOKEN;
     const url = 'https://slack.com/api/channels.history';
 
+    console.log("token", token)
     const payload = {
         "token": token,
         "channel": 'CST6SDG2F',
@@ -27,6 +29,7 @@ const getMessages = async function () {
                 }
             });
    });
+   console.log(array)
    return array;
 };
 

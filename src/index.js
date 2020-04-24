@@ -9,7 +9,7 @@ const ToSpeech = async function(array) {
     const client = new textToSpeech.TextToSpeechClient();
 
     const request = {
-        input: {text: array[0] },
+        input: {text: array[1] },
         voice: {languageCode: 'en-US', name: 'en-US-Wavenet-D'},
         audioConfig: {
             audioEncoding: `MP3`,
@@ -18,7 +18,7 @@ const ToSpeech = async function(array) {
         },
     };
 
-    console.log("get the value: ", array[0])
+    console.log("get the value: ", array[1])
     const [response] = await client.synthesizeSpeech(request);
     fs.writeFileSync(`../output/output.mp3`, response.audioContent, `binary`)
 };

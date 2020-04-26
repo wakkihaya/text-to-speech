@@ -7,6 +7,7 @@ dotenv.config({ path: '../.env'});
 
 const ToSpeech = async function(array) {
     const client = new textToSpeech.TextToSpeechClient();
+    const outFile = '../output/output.mp3';
 
     const request = {
         input: {text: array[1] },
@@ -20,7 +21,9 @@ const ToSpeech = async function(array) {
 
     console.log("get the value: ", array[1])
     const [response] = await client.synthesizeSpeech(request);
-    fs.writeFileSync(`../output/output.mp3`, response.audioContent, `binary`)
+    fs.writeFileSync(outFile, response.audioContent, `binary`)
+    console.log('Audio content written to file ' + outFile);
+
 };
 
 const main = async () =>{

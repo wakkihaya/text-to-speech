@@ -1,4 +1,4 @@
-import OpenJTalk from "openjtalk"
+// import OpenJTalk from "openjtalk"
+import output from '../output/output.mp3'
 
-var mei = new OpenJTalk();
-mei.talk('こんにちは世界');
+os.system('afplay output');
